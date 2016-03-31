@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -23,7 +23,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -45,7 +45,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
           'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
+            controller: 'MyCardsCtrl'
+          }
+        }
+      })
+      .state('tab.card-detail', {
+        url: '/cards/:cardId',
+        views: {
+          'tab-chats': {
+            templateUrl: 'templates/card-detail.html',
+            controller: 'MyCardDetailCtrl'
           }
         }
       })
@@ -81,5 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');
-
+    //
+    //$httpProvider.defaults.useXDomain = true;
+    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });

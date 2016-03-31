@@ -1,7 +1,28 @@
 angular.module('starter.controllers', [])
 
-  .controller('DashCtrl', function ($scope) {
+  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG) {
+    $scope.cards = [];
+    $scope.defaultLogo = CONFIG.defaultLogoUrl;
+
+    BonusCards.getMyCards().then(function (data) {
+      $scope.cards = data.data.items;
+    });
   })
+  .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG) {
+    $scope.card = {};
+    $scope.defaultLogo = CONFIG.defaultLogoUrl;
+
+    BonusCards.getCard($stateParams.cardId).then(function (data) {
+      $scope.card = data.data;
+    });
+  })
+
+
+
+
+
+
+
 
   .controller('ChatsCtrl', function ($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called
@@ -27,3 +48,4 @@ angular.module('starter.controllers', [])
       enableFriends: true
     };
   });
+
