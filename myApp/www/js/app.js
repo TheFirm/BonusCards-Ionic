@@ -68,12 +68,12 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           }
         }
       })
-      .state('tab.chat-detail', {
-        url: '/chats/:chatId',
+      .state('tab.card-create', {
+        url: '/card-create/:serviceId',
         views: {
           'tab-services': {
-            templateUrl: 'templates/chat-detail.html',
-            controller: 'ChatDetailCtrl'
+            templateUrl: 'templates/card-create.html',
+            controller: 'CardCreateCtrl'
           }
         }
       })

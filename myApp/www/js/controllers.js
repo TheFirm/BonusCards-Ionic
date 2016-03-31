@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+  /* MyCardsCtrl */
   .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG) {
     $scope.cards = [];
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
@@ -14,6 +15,8 @@ angular.module('starter.controllers', [])
       })
     };
   })
+
+  /* MyCardDetailCtrl */
   .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG) {
     $scope.card = {};
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
@@ -23,16 +26,8 @@ angular.module('starter.controllers', [])
     });
   })
 
-
+  /* ServicesCtrl */
   .controller('ServicesCtrl', function ($scope, Services) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
-
     $scope.services = [];
     Services.getServices().then(function(data){
       $scope.services = data.data.items;
@@ -40,8 +35,9 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
+  /* CardCreateCtrl */
+  .controller('CardCreateCtrl', function ($scope, $stateParams) {
+    //$scope.chat = Chats.get($stateParams.serviceId);
   })
 
   .controller('AccountCtrl', function ($scope) {
