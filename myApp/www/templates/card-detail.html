@@ -4,11 +4,12 @@
     <div class="item item-avatar">
       <img ng-if="card.service.logo_url" ng-src="{{card.service.logo_url}}" style="width: 128px; height: 128px">
       <img ng-if="!card.service.logo_url" ng-src="{{defaultLogo}}" style="width: 128px; height: 128px">
-      <h2>{{card.name}}</h2>
+      <h2 ng-if="card.name">{{card.name}}</h2>
+      <h2 ng-if="!card.name">{{card.service.name}}</h2>
       <p>{{card.code}}</p>
     </div>
-    <div barcode-directive="card.code" class="item item-image">
-      <img id="barcode"/>
+    <div class="item item-image">
+      <barcode-directive current-code="card.code"></barcode-directive>
     </div>
 
   </ion-content>

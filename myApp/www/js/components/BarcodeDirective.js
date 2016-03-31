@@ -1,18 +1,21 @@
 
 'use strict';
 
-app.directive('barcodeDirective', function ($timeout) {
+app.directive('barcodeDirective', function () {
   return {
     restrict: 'EAC',
     scope: {
-      barcodeDirective: '='
+      currentCode: '='
     },
+    template: '<img class="barcode"/>',
     link: function(scope, element) {
-        scope.$watch('barcodeDirective', function(){
-          if (scope.barcodeDirective) {
-            JsBarcode("#barcode", scope.barcodeDirective);
-          }
-        });
+      console.log(true);
+          scope.$watch('currentCode', function(){
+            if (scope.currentCode) {
+              var barcodeImg = element.find('.barcode');
+              $(barcodeImg).JsBarcode(scope.currentCode);;
+            }
+          });
     }
   };
 });
