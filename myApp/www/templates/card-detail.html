@@ -7,8 +7,9 @@
       <h2>{{card.name}}</h2>
       <p>{{card.code}}</p>
     </div>
-    <div class="item item-image">
-      <img src="{{defaultLogo}}">
+    <div barcode-directive="card.code" class="item item-image">
+      <img id="barcode"/>
     </div>
+
   </ion-content>
 </ion-view>
