@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "JsBarcode": "jsbarcode#^2.5.1"
+    "JsBarcode": "jsbarcode#^2.5.1",
+    "jquery": "^2.2.2"
   }
 }
