@@ -77,9 +77,22 @@ app.factory('BonusCards', function (WebApi, $q) {
     return promise.promise;
   }
 
+  function removeCard(id) {
+    var promise = $q.defer();
+
+    WebApi.removeCard(id).then(function (response) {
+      promise.resolve(response.data);
+    }, function (error) {
+      promise.reject(error);
+    });
+
+    return promise.promise;
+  }
+
   return {
     getCard: getCard,
     getMyCards: getMyCards,
+    removeCard: removeCard
     //remove: function (card) {
     //  cards.splice(cards.indexOf(card), 1);
     //}

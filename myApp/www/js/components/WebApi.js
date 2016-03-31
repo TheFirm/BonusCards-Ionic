@@ -24,13 +24,18 @@ app.factory('WebApi', function ($http) {
   function viewCard(id) {
     return $http.get(API_URL + 'bonus-cards/' + id, options);
   }
+
+  function removeCard(id) {
+    return $http.delete(API_URL + 'bonus-cards/' + id, options);
+  }
   /* End. Bonus Cards */
 
 
   return {
     login: login,
     myCards: myCards,
-    viewCard: viewCard
+    viewCard: viewCard,
+    removeCard: removeCard
   }
 })
 ;

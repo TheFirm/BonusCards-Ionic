@@ -40,8 +40,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 
       // Each tab has its own nav history stack:
 
-      .state('tab.dash', {
-        url: '/dash',
+      .state('tab.cards', {
+        url: '/cards',
         views: {
           'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
@@ -52,7 +52,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
       .state('tab.card-detail', {
         url: '/cards/:cardId',
         views: {
-          'tab-chats': {
+          'tab-dash': {
             templateUrl: 'templates/card-detail.html',
             controller: 'MyCardDetailCtrl'
           }
@@ -89,7 +89,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/cards');
     //
     //$httpProvider.defaults.useXDomain = true;
     //delete $httpProvider.defaults.headers.common['X-Requested-With'];

@@ -4,6 +4,12 @@ angular.module('starter.controllers', [])
     $scope.cards = [];
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
 
+    $scope.removeCard = function (card) {
+      BonusCards.removeCard(card.id).then(function(){
+        $scope.cards.splice($scope.cards.indexOf(card), 1);
+      })
+    };
+
     BonusCards.getMyCards().then(function (data) {
       $scope.cards = data.data.items;
     });
@@ -16,12 +22,6 @@ angular.module('starter.controllers', [])
       $scope.card = data.data;
     });
   })
-
-
-
-
-
-
 
 
   .controller('ChatsCtrl', function ($scope, Chats) {

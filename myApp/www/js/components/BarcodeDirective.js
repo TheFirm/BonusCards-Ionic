@@ -1,4 +1,3 @@
-
 'use strict';
 
 app.directive('barcodeDirective', function () {
@@ -8,14 +7,13 @@ app.directive('barcodeDirective', function () {
       currentCode: '='
     },
     template: '<img class="barcode"/>',
-    link: function(scope, element) {
-      console.log(true);
-          scope.$watch('currentCode', function(){
-            if (scope.currentCode) {
-              var barcodeImg = element.find('.barcode');
-              $(barcodeImg).JsBarcode(scope.currentCode);;
-            }
-          });
+    link: function (scope, element) {
+      scope.$watch('currentCode', function () {
+        if (scope.currentCode) {
+          var barcodeImg = element.find('.barcode');
+          $(barcodeImg).JsBarcode(scope.currentCode);
+        }
+      });
     }
   };
 });
