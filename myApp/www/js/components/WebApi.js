@@ -1,5 +1,5 @@
 app.factory('WebApi', function ($http) {
-  var API_URL = 'http://barcode-api.loc/v1/';
+  var API_URL = 'http://bonuscards.relevant.software/v1/';
   var options = {
     headers: {
       'Authorization': 'Bearer ' + window.localStorage.tokenApi,
