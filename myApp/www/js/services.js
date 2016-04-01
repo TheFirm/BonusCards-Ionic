@@ -21,7 +21,7 @@ angular.module('starter.services', [])
   });
 
 /* LoginService Cards */
-app.factory('LoginService', function (WebApi, $q, ngFB, $state) {
+app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $window) {
   function afterLogin() {
     var promise = $q.defer();
     ngFB.api({
@@ -31,6 +31,8 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state) {
         function (user) {
        WebApi.login(user).then(function (response) {
          window.localStorage.tokenApi = response.data.data.access_token;
+           $location.path('#/tab/cards');
+           $window.location.reload();
          }, function (error) {
            console.log('Get auth token:', +error);
            promise.reject(error);

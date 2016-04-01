@@ -28,7 +28,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
                     if (response.status === 'connected') {
                         console.log('Facebook login succeeded');
                         LoginService.afterLogin();
-                            $state.go('tab.cards', {}, {reload: true});
                     } else {
                         alert('Facebook login failed');
                     }
@@ -91,17 +90,32 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
         };
     })
 
-  /* CardCreateCtrl */
-  .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner) {
-    $scope.scanBarcode = function() {
-      $cordovaBarcodeScanner.scan().then(function(imageData) {
-        alert(imageData.text);
-        console.log("Barcode Format -> " + imageData.format);
-        console.log("Cancelled -> " + imageData.cancelled);
-      }, function(error) {
-        console.log("An error happened -> " + error);
-      });
-    };
-  });
+    /* CardCreateCtrl */
+    .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner, LoginService, WebApi) {
+        LoginService.loginCheck();
+
+        $scope.scanBarcode = function () {
+            $cordovaBarcodeScanner.scan().then(function (imageData) {
+                $scope.barcode = imageData.text;
+                console.log("Barcode Format -> " + imageData.format);
+                console.log("Cancelled -> " + imageData.cancelled);
+            }, function (error) {
+                console.log("An error happened -> " + error);
+            });
+        };
+
+        $scope.submit =  function submit(){
+            console.log($scope.serviceId);
+            option = {
+                name: $scope.name,
+                //service: $scope.serviceId,
+                code: $scope.barcode,
+            }
+            WebApi.addCard(option);
+        }
+
+
+
+    });
 
 

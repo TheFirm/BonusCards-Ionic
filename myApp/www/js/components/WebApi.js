@@ -16,9 +16,14 @@ app.factory('WebApi', function ($http) {
     return $http.post(API_URL + 'user/auth', data);
   }
 
-  /* Start. Bonus Cards */
+  /* Add Bonus Cards */
   function myCards() {
     return $http.get(API_URL + 'bonus-card/my-cards?page=1', options);
+  }
+
+  /* Start. Bonus Cards */
+  function addCard(data) {
+    return $http.post(API_URL + 'bonus-cards',data, options);
   }
 
   function viewCard(id) {
@@ -42,6 +47,7 @@ app.factory('WebApi', function ($http) {
     myCards: myCards,
     viewCard: viewCard,
     removeCard: removeCard,
-    getServices: getServices
+    getServices: getServices,
+    addCard: addCard
   }
 });
