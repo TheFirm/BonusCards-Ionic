@@ -2,14 +2,14 @@ app.factory('WebApi', function ($http) {
   var API_URL = 'http://barcode-api.loc/v1/';
   var options = {
     headers: {
-      'Authorization': 'Bearer 123',
+      'Authorization': 'Bearer ' + window.localStorage.tokenApi,
       'Content-Type': 'application/json'
     }
   };
 
   function login(opt) {
     var data = {
-      facebook_user_id: opt.facebook_user_id,
+      facebook_user_id: opt.id,
       name: opt.name
     };
 

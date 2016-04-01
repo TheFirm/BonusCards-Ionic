@@ -1,0 +1,20 @@
+<ion-view view-title="Profile">
+    <ion-content>
+        <div class="list card">
+            <div class="item">
+                <h2>{{user.name}}
+
+                </h2>
+                <p>{{user.city}}</p>
+            </div>
+            <div class="item item-body">
+                <img src="http://graph.facebook.com/{{user.id}}/picture?width=270&height=270"/>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+
+<!-- Account Tab -->
+<ion-tab title="Logout" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="logout()">
+    <ion-nav-view name="tab-account"></ion-nav-view>
+</ion-tab>

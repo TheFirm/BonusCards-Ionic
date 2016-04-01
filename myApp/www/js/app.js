@@ -5,9 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, ngFB, LoginService, $state) {
+
+    ngFB.init({appId: '201005016956542',tokenStore : window.localStorage});
+
+
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -31,12 +35,29 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
     // Each state's controller can be found in controllers.js
     $stateProvider
 
-    // setup an abstract state for the tabs directive
+        .state('login', {
+          url: '/login',
+          templateUrl: 'templates/login.html',
+          controller: "LoginCtrl"
+        })
+
+
+        // setup an abstract state for the tabs directive
       .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
       })
+
+        .state('tab.profile', {
+          url: "/profile",
+          views: {
+            'tab-profile': {
+              templateUrl: "templates/tab-profile.html",
+              controller: "ProfileCtrl"
+            }
+          }
+        })
 
       // Each tab has its own nav history stack:
 
@@ -86,7 +107,9 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
             controller: 'AccountCtrl'
           }
         }
-      });
+      })
+
+    ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/cards');

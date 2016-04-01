@@ -20,6 +20,50 @@ angular.module('starter.services', [])
     };
   });
 
+/* LoginService Cards */
+app.factory('LoginService', function (WebApi, $q, ngFB, $state) {
+  function afterLogin() {
+    var promise = $q.defer();
+    ngFB.api({
+      path: '/me',
+      params: {fields: 'id,name'}
+    }).then(
+        function (user) {
+       WebApi.login(user).then(function (response) {
+         window.localStorage.tokenApi = response.data.data.access_token;
+         }, function (error) {
+           console.log('Get auth token:', +error);
+           promise.reject(error);
+         });
+        },
+        function (error) {
+          alert('Facebook error: ' + error.error_description);
+        });
+  }
+
+  function  isLogged(){
+    if(window.localStorage.tokenApi &&  ngFB.getLoginStatus().$$state.value.status == 'connected'){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function  loginCheck(){
+    if(!window.localStorage.tokenApi ||  ngFB.getLoginStatus().$$state.value.status != 'connected'){
+      $state.go('login', {}, {reload: true});
+    }
+  }
+
+
+  return {
+    afterLogin: afterLogin,
+    isLogged: isLogged,
+    loginCheck: loginCheck,
+
+  };
+})
+
 /* Bonus Cards */
 app.factory('BonusCards', function (WebApi, $q) {
 
