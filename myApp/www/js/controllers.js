@@ -36,8 +36,16 @@ angular.module('starter.controllers', [])
   })
 
   /* CardCreateCtrl */
-  .controller('CardCreateCtrl', function ($scope, $stateParams) {
-    //$scope.chat = Chats.get($stateParams.serviceId);
+  .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner) {
+    $scope.scanBarcode = function() {
+      $cordovaBarcodeScanner.scan().then(function(imageData) {
+        alert(imageData.text);
+        console.log("Barcode Format -> " + imageData.format);
+        console.log("Cancelled -> " + imageData.cancelled);
+      }, function(error) {
+        console.log("An error happened -> " + error);
+      });
+    };
   })
 
   .controller('AccountCtrl', function ($scope) {
