@@ -78,7 +78,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
     $scope.logout = function () {
       localStorage.clear();
-      $state.go('login', {}, {reload: true})
+      $state.go('login', {}, {reload: true}, {reload: true})
     };
   })
 
@@ -109,11 +109,13 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       console.log($scope.serviceId);
       option = {
         name: $scope.name,
-        service: $stateParams.serviceId,
+        service_id: $stateParams.serviceId,
         code: $scope.barcode,
       }
       WebApi.addCard(option).then(function (response) {
+        $scope.barcode = $scope.name = '';
         $state.go('tab.card-detail', {"cardId": response.data.data.id});
+
       }, function (error) {
         alert(error.data.data[0].message);
         promise.reject(error);
