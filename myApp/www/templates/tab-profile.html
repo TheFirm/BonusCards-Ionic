@@ -1,20 +1,20 @@
 <ion-view view-title="Profile">
-    <ion-content>
-        <div class="list card">
-            <div class="item">
-                <h2>{{user.name}}
+  <ion-content>
+    <div class="list card">
+      <div class="item">
+        <div class="row">
+          <div class="col col-80"><h2>{{user.name}}</h2></div>
+          <div class="col col-10">
+            <button title="Logout" class="button icon button-dark ion-log-out " ng-click="logout()">
 
-                </h2>
-                <p>{{user.city}}</p>
-            </div>
-            <div class="item item-body">
-                <img src="http://graph.facebook.com/{{user.id}}/picture?width=270&height=270"/>
-            </div>
+            </button>
+          </div>
         </div>
-    </ion-content>
-</ion-view>
 
-<!-- Account Tab -->
-<ion-tab title="Logout" icon-off="ion-log-out" icon-on="ion-log-out" ng-click="logout()">
-    <ion-nav-view name="tab-account"></ion-nav-view>
-</ion-tab>
+      </div>
+      <div class="item item-body">
+        <img src="http://graph.facebook.com/{{user.id}}/picture?width=270&height=270"/>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
