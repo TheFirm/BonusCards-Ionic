@@ -12,20 +12,17 @@
           <input type="text" ng-model="name" placeholder="Name">
         </label>
 
-        <label class="item item-input item-floating-label">
-          <input type="text" required ng-model="barcode" placeholder="Card number">
-        </label>
-
-        <button class="button icon button-dark" ng-click="scanBarcode()">
-          <span class="ion-qr-scanner"></span><span class="scan">scan</span>
-        </button>
-
+        <div class="item-input-inset scan-input-block">
+          <label class="item item-input item-floating-label item-input-wrapper">
+            <input type="text" required ng-model="barcode" placeholder="Card number">
+          </label>
+          <button class="button button-small button-dark" ng-click="scanBarcode()">
+            <span class="ion-qr-scanner"></span>
+          </button>
+        </div>
         <input type="hidden" ng-model="service" placeholder="Service">
-
       </div>
-      <button class="button button-block button-positive">
-        Add
-      </button>
+      <button class="button button-block button-positive">Add</button>
     </form>
   </ion-content>
 </ion-view>

@@ -1,3 +1,14 @@
 /* Empty. Add your own CSS if you like */
 .scan {margin-left: 10px;}
 .ng-invalid {border-color: red;}
+.scan-input-block{
+  padding-left: 1px;
+}
+.scan-input-block .item-input-wrapper{
+  border-radius: 0;
+}
+.scan-input-block .button{
+  padding: 6px 12px 4px;
+}
+
+
