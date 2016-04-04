@@ -8,15 +8,13 @@
   <ion-content class="padding">
     <form ng-submit="submit()" ng-controller="CardCreateCtrl">
       <div class="list">
+        <label class="item item-input item-floating-label" ng-show="!currentServiceId">
+          <input type="text" ng-model="name" placeholder="Name">
+        </label>
 
-          <label class="item item-input item-floating-label">
-            <input type="text" ng-model="name" placeholder="Name">
-          </label>
-
-            <label class="item item-input item-floating-label">
-              <input type="text" required ng-model="barcode" placeholder="Card number">
-            </label>
-
+        <label class="item item-input item-floating-label">
+          <input type="text" required ng-model="barcode" placeholder="Card number">
+        </label>
 
         <button class="button icon button-dark" ng-click="scanBarcode()">
           <span class="ion-qr-scanner"></span><span class="scan">scan</span>

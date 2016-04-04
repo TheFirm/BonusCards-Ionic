@@ -65,7 +65,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
         views: {
           'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
-            controller: 'MyCardsCtrl'
+            controller: 'MyCardsCtrl',
+            cache: false
           }
         }
       })
@@ -112,7 +113,4 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/cards');
-    //
-    //$httpProvider.defaults.useXDomain = true;
-    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });

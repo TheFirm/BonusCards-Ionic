@@ -1,16 +1,12 @@
-<ion-view view-title="{{card.name}}">
+<ion-view view-title="{{card.name?card.name:card.service.name}}">
   <ion-content class="padding">
-
     <div class="item item-avatar">
-      <img ng-if="card.service.logo_url" ng-src="{{card.service.logo_url}}" style="width: 128px; height: 128px">
-      <img ng-if="!card.service.logo_url" ng-src="{{defaultLogo}}" style="width: 128px; height: 128px">
-      <h2 ng-if="card.name">{{card.name}}</h2>
-      <h2 ng-if="!card.name">{{card.service.name}}</h2>
+      <img ng-src="{{getCardLogo(card)}}" style="width: 128px; height: 128px">
+      <h2>{{card.name?card.name:card.service.name}}</h2>
       <p>{{card.code}}</p>
     </div>
     <div class="item item-image">
       <barcode-directive current-code="card.code"></barcode-directive>
     </div>
-
   </ion-content>
 </ion-view>

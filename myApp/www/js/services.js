@@ -28,43 +28,41 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $wind
       path: '/me',
       params: {fields: 'id,name'}
     }).then(
-        function (user) {
-       WebApi.login(user).then(function (response) {
-         window.localStorage.tokenApi = response.data.data.access_token;
-           $location.path('#/tab/cards');
-           $window.location.reload();
-         }, function (error) {
-           console.log('Get auth token:', +error);
-           promise.reject(error);
-         });
-        },
-        function (error) {
-          alert('Facebook error: ' + error.error_description);
+      function (user) {
+        WebApi.login(user).then(function (response) {
+          window.localStorage.tokenApi = response.data.data.access_token;
+          $location.path('#/tab/cards');
+          $window.location.reload();
+        }, function (error) {
+          console.log('Get auth token:', +error);
+          promise.reject(error);
         });
+      },
+      function (error) {
+        alert('Facebook error: ' + error.error_description);
+      });
   }
 
-  function  isLogged(){
-    if(window.localStorage.tokenApi &&  ngFB.getLoginStatus().$$state.value.status == 'connected'){
+  function isLogged() {
+    if (window.localStorage.tokenApi && ngFB.getLoginStatus().$$state.value.status == 'connected') {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
-  function  loginCheck(){
-    if(!window.localStorage.tokenApi ||  ngFB.getLoginStatus().$$state.value.status != 'connected'){
+  function loginCheck() {
+    if (!window.localStorage.tokenApi || ngFB.getLoginStatus().$$state.value.status != 'connected') {
       $state.go('login', {}, {reload: true});
     }
   }
 
-
   return {
     afterLogin: afterLogin,
     isLogged: isLogged,
-    loginCheck: loginCheck,
-
+    loginCheck: loginCheck
   };
-})
+});
 
 /* Bonus Cards */
 app.factory('BonusCards', function (WebApi, $q) {
@@ -110,5 +108,11 @@ app.factory('BonusCards', function (WebApi, $q) {
     getCard: getCard,
     getMyCards: getMyCards,
     removeCard: removeCard
+  };
+});
+
+app.service('CardHelper', function (CONFIG) {
+  this.getCardLogo = function (card) {
+    return card.service ? card.service.logo_url : CONFIG.defaultLogoUrl;
   };
 });

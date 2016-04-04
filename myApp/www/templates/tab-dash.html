@@ -1,6 +1,9 @@
-<ion-view view-title="MyCards">
+<ion-view cache-view="false" view-title="MyCards">
   <ion-content>
     <ion-list>
+      <div class="card" ng-if="!cards.length">
+        <div class="item item-text-wrap">You have not any cards.</div>
+      </div>
       <ion-item  class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards" type="item-text-wrap"
                 href="#/tab/cards/{{card.id}}">
         <img ng-if="card.service.logo_url" ng-src="{{card.service.logo_url}}">

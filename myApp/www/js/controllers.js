@@ -6,7 +6,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     $scope.cards = [];
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
 
-
     BonusCards.getMyCards().then(function (data) {
       $scope.cards = data.data.items;
     });
@@ -37,10 +36,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   })
 
   /* MyCardDetailCtrl */
-  .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG, LoginService) {
+  .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG, LoginService, CardHelper) {
     LoginService.loginCheck();
     $scope.card = {};
-    $scope.defaultLogo = CONFIG.defaultLogoUrl;
+    $scope.getCardLogo = CardHelper.getCardLogo;
 
     BonusCards.getCard($stateParams.cardId).then(function (data) {
       $scope.card = data.data;
@@ -55,12 +54,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       $scope.services = data.data.items;
     });
 
-  })
-
-  /* CardCreateCtrl */
-  .controller('CardCreateCtrl', function ($scope, $stateParams, LoginService) {
-    LoginService.loginCheck();
-    //$scope.chat = Chats.get($stateParams.serviceId);
   })
 
   .controller('ProfileCtrl', function ($scope, ngFB, $state, LoginService) {
@@ -94,6 +87,8 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner, LoginService, WebApi, $q, $state) {
     LoginService.loginCheck();
 
+    $scope.currentServiceId = $stateParams.serviceId ? $stateParams.serviceId : false;
+
     $scope.scanBarcode = function () {
       $cordovaBarcodeScanner.scan().then(function (imageData) {
         $scope.barcode = imageData.text;
@@ -105,24 +100,21 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     };
 
     $scope.submit = function submit() {
-      var promise = $q.defer();
-      console.log($scope.serviceId);
-      option = {
-        name: $scope.name,
-        service_id: $stateParams.serviceId,
-        code: $scope.barcode,
-      }
+      var promise = $q.defer(),
+        option = {
+          name: $scope.name,
+          service_id: $stateParams.serviceId,
+          code: $scope.barcode
+        };
+
       WebApi.addCard(option).then(function (response) {
         $scope.barcode = $scope.name = '';
         $state.go('tab.card-detail', {"cardId": response.data.data.id});
-
       }, function (error) {
         alert(error.data.data[0].message);
         promise.reject(error);
       });
     }
-
-
   });
 
 
