@@ -53,15 +53,15 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $wind
 
   function loginCheck() {
 
-    ngFB.api({
-      path: '/me',
-      params: {fields: 'id,name'}
-    }).then(
-      function (user) {
-      },
-      function (error) {
-        window.localStorage.clear();
-      });
+    //ngFB.api({
+    //  path: '/me',
+    //  params: {fields: 'id,name'}
+    //}).then(
+    //  function (user) {
+    //  },
+    //  function (error) {
+    //    window.localStorage.clear();
+    //  });
 
     if (!window.localStorage.tokenApi || ngFB.getLoginStatus().$$state.value.status != 'connected' ) {
 
