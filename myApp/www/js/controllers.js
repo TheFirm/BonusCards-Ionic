@@ -99,9 +99,8 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       });
     };
 
-    $scope.submit = function submit() {
-      var promise = $q.defer(),
-        option = {
+    $scope.submit = function () {
+      var option = {
           name: $scope.name,
           service_id: $stateParams.serviceId,
           code: $scope.barcode
@@ -112,7 +111,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
         $state.go('tab.card-detail', {"cardId": response.data.data.id});
       }, function (error) {
         alert(error.data.data[0].message);
-        promise.reject(error);
       });
     }
   });
