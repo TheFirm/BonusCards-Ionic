@@ -39,7 +39,7 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $wind
         });
       },
       function (error) {
-        alert('Facebook error: ' + error.error_description);
+        console.log( error);
       });
   }
 
@@ -52,7 +52,20 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $wind
   }
 
   function loginCheck() {
-    if (!window.localStorage.tokenApi || ngFB.getLoginStatus().$$state.value.status != 'connected') {
+
+    ngFB.api({
+      path: '/me',
+      params: {fields: 'id,name'}
+    }).then(
+      function (user) {
+      },
+      function (error) {
+        window.localStorage.clear();
+      });
+
+    if (!window.localStorage.tokenApi || ngFB.getLoginStatus().$$state.value.status != 'connected' ) {
+
+      window.localStorage.clear();
       $state.go('login', {}, {reload: true});
     }
   }
