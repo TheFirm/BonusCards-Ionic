@@ -5,13 +5,13 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="MyCards" icon-off="ion-card" icon-on="ion-card" href="#/tab/cards/">
+  <ion-tab title="MyCards" icon-off="ion-card" icon-on="ion-card"
+           ng-click="onTabSelected()" ng-controller="MyCardsCtrl" href="#/tab/cards/">
     <ion-nav-view name="tab-dash"></ion-nav-view>
   </ion-tab>
 
-  <!-- Chats Tab -->
-  <ion-tab title="Add" icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus" href="#/tab/services">
+  <ion-tab title="Add" icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus"
+           ng-click="onTabSelected()" ng-controller="CardCreateCtrl" href="#/tab/services">
     <ion-nav-view name="tab-services"></ion-nav-view>
   </ion-tab>
 

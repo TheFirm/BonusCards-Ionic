@@ -1,10 +1,14 @@
 angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
   /* MyCardsCtrl */
-  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService) {
+  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService, $state) {
     LoginService.loginCheck();
     $scope.cards = [];
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
+
+    $scope.onTabSelected = function() {
+      $state.go('tab.cards');
+    };
 
     BonusCards.getMyCards().then(function (data) {
       $scope.cards = data.data.items;
@@ -88,6 +92,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     LoginService.loginCheck();
 
     $scope.currentServiceId = $stateParams.serviceId ? $stateParams.serviceId : false;
+
+    $scope.onTabSelected = function() {
+      $state.go('tab.services');
+    };
 
     $scope.scanBarcode = function () {
       $cordovaBarcodeScanner.scan().then(function (imageData) {
