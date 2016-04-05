@@ -66,7 +66,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
         $scope.user = user;
       },
       function (error) {
-        alert('Facebook error: ' + error.error_description);
+        alert('Facebook error: ' + error.message);
       });
 
     $scope.logout = function () {
