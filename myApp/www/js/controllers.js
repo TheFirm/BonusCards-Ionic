@@ -20,7 +20,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     };
   })
 
-  .controller('LoginCtrl', function ($scope, ngFB, LoginService, $state) {
+  .controller('LoginCtrl', function ($scope, ngFB, LoginService, $state, $ionicPopup) {
     if (window.localStorage.tokenApi) {
       $state.go('tab.cards', {}, {reload: true})
     }
@@ -31,7 +31,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
             console.log('Facebook login succeeded');
             LoginService.afterLogin();
           } else {
-            alert('Facebook login failed');
+            $ionicPopup.alert({
+              title: 'Error',
+              content: 'Facebook login failed'
+            });
           }
         });
     };
@@ -39,14 +42,19 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   })
 
   /* MyCardDetailCtrl */
-  .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG, LoginService, CardHelper) {
+  .controller('MyCardDetailCtrl', function ($scope, $stateParams, BonusCards, CONFIG, LoginService, CardHelper,  $ionicHistory) {
     LoginService.loginCheck();
     $scope.card = {};
+
     $scope.getCardLogo = CardHelper.getCardLogo;
 
     BonusCards.getCard($stateParams.cardId).then(function (data) {
       $scope.card = data.data;
+      $scope.cardName =  $scope.card.name?$scope.card.name:$scope.card.service.name;
     });
+
+
+
   })
 
   /* ServicesCtrl */
@@ -56,10 +64,20 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     Services.getServices().then(function (data) {
       $scope.services = data.data.items;
     });
+    $scope.doRefresh = function() {
+      Services.getServices().then(function (data) {
+        $scope.services = data.data.items;
+      })
+      .finally(function() {
+        // Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+
 
   })
 
-  .controller('ProfileCtrl', function ($scope, ngFB, $state, LoginService) {
+  .controller('ProfileCtrl', function ($scope, ngFB, $state, LoginService, $ionicPopup) {
     LoginService.loginCheck();
     ngFB.api({
       path: '/me',
@@ -69,7 +87,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
         $scope.user = user;
       },
       function (error) {
-        alert('Facebook error: ' + error.message);
+        $ionicPopup.alert({
+          title: 'Error',
+          content: error.message
+        });
       });
 
     $scope.logout = function () {
@@ -78,16 +99,9 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     };
   })
 
-  .controller('AccountCtrl', function ($scope, LoginService) {
-    LoginService.loginCheck();
-
-    $scope.settings = {
-      enableFriends: true
-    };
-  })
 
   /* CardCreateCtrl */
-  .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner, LoginService, WebApi, $q, $state) {
+  .controller('CardCreateCtrl', function ($scope, $stateParams, $cordovaBarcodeScanner, LoginService, WebApi, $q, $state, $ionicPopup)  {
     LoginService.loginCheck();
 
     $scope.currentServiceId = $stateParams.serviceId ? $stateParams.serviceId : false;
@@ -115,9 +129,13 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
       WebApi.addCard(option).then(function (response) {
         $scope.barcode = $scope.name = '';
+
         $state.go('tab.card-detail', {"cardId": response.data.data.id});
       }, function (error) {
-        alert(error.data.data[0].message);
+        $ionicPopup.alert({
+          title: 'Error',
+          content: error.data.data[0].message
+        });
       });
     }
   });

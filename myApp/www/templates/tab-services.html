@@ -1,5 +1,11 @@
 <ion-view view-title="Services">
-  <ion-content>
+  <ion-content ng-controller="ServicesCtrl">
+
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+
     <ion-list>
       <ion-item class="item-avatar item-icon-right"
                 type="item-text-wrap" href="#/tab/card-create/">

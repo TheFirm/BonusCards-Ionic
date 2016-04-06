@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
-.scan {margin-left: 10px;}
+.scan {margin-left: 10px;font-size: 16px;}
 .ng-invalid {border-color: red;}
 .scan-input-block{
   padding-left: 1px;
