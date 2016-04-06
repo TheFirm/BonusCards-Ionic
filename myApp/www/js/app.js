@@ -68,6 +68,11 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
             controller: 'MyCardsCtrl',
             cache: false
           }
+        },
+        resolve: {
+          cardsList: function (BonusCards) {
+            return BonusCards.getMyCards();
+          }
         }
       })
       .state('tab.card-detail', {

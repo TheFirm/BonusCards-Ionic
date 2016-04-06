@@ -1,18 +1,20 @@
 angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
   /* MyCardsCtrl */
-  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService, $state) {
+  .controller('MainCtrl', function ($scope, $state) {
+    $scope.onTabSelected = function(state) {
+      $state.go(state);
+    };
+  })
+
+  /* MyCardsCtrl */
+  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService, $state, cardsList, $ionicNavBarDelegate) {
     LoginService.loginCheck();
     $scope.cards = [];
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
 
-    $scope.onTabSelected = function() {
-      $state.go('tab.cards');
-    };
-
-    BonusCards.getMyCards().then(function (data) {
-      $scope.cards = data.data.items;
-    });
+    $scope.cards = cardsList.data.items;
+    console.log(cardsList);
 
     $scope.removeCard = function (card) {
       BonusCards.removeCard(card.id).then(function () {
@@ -21,7 +23,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     };
   })
 
-  .controller('LoginCtrl', function ($scope, ngFB, LoginService, $state, LoginService) {
+  .controller('LoginCtrl', function ($scope, ngFB, LoginService, $state) {
     if (window.localStorage.tokenApi) {
       $state.go('tab.cards', {}, {reload: true})
     }
