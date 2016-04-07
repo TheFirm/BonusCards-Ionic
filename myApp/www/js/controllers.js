@@ -8,8 +8,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   })
 
   /* MyCardsCtrl */
-  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService, $state, cardsList) {
+  .controller('MyCardsCtrl', function ($scope, BonusCards, CONFIG, LoginService, $state, cardsList, $ionicHistory) {
     LoginService.loginCheck();
+    $ionicHistory.clearHistory();
+
     $scope.defaultLogo = CONFIG.defaultLogoUrl;
     $scope.cards = cardsList.data.items;
 
