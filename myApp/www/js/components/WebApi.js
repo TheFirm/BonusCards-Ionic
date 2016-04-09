@@ -18,7 +18,12 @@ app.factory('WebApi', function ($http) {
 
   /* Add Bonus Cards */
   function myCards() {
-    return $http.get(API_URL + 'bonus-card/my-cards?page=1', options);
+    return $http.get(API_URL + 'bonus-card/my-cards?page=1', options).
+    then(function(response) {
+      return response;
+    }, function(response) {
+      return response;
+    });
   }
 
   /* Start. Bonus Cards */
