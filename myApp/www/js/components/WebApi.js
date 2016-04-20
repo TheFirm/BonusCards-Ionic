@@ -46,6 +46,16 @@ app.factory('WebApi', function ($http) {
     return $http.get(API_URL + 'services', options);
   }
 
+  function tableCheckout(data) {
+    return $http.post(API_URL + 'check-in',data, options);
+  }
+
+  function getCafes() {
+    return $http.get(API_URL + 'cafes', options);
+  }
+
+
+
 
   return {
     login: login,
@@ -53,6 +63,8 @@ app.factory('WebApi', function ($http) {
     viewCard: viewCard,
     removeCard: removeCard,
     getServices: getServices,
-    addCard: addCard
+    addCard: addCard,
+    tableCheckout: tableCheckout,
+    getCafes : getCafes
   }
 });

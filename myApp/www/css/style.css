@@ -20,4 +20,9 @@
 .profile .button.ion-log-out{
   float: right;
 }
-
+.checkin-page .card-info{
+  text-align: center;
+}
+.checkin-page .card-info .fest-logo{
+  width: 50%;
+}

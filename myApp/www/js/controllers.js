@@ -140,6 +140,61 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
         });
       });
     }
+  })
+
+
+  /* CardCreateCtrl */
+  .controller('CheckinCtrl', function ($scope, LoginService, cardsList, $cordovaBarcodeScanner, WebApi, $ionicPopup)  {
+    LoginService.loginCheck();
+
+    $scope.selectedCafe = {value : null};
+    $scope.table = {id : null};
+
+    /* Get first !fest card data */
+    if(cardsList.data.items){
+      $scope.card = cardsList.data.items.filter(function (card) {
+        return card.service.id == 1;
+      })[0];
+    }
+
+    WebApi.getCafes().then(function (response) {
+      $scope.cafes = response.data.data;
+    });
+
+
+    $scope.scanBarcode = function () {
+      $cordovaBarcodeScanner.scan().then(function (imageData) {
+        $scope.code = imageData.text;
+        var codeData = $scope.code.split(',');
+        $scope.selectedCafe.value = $scope.cafes.filter(function (cafe) {
+          return cafe.id == codeData[0]
+        })[0];
+        $scope.table.id = codeData[1];
+      }, function (error) {
+        console.log('An error happened -> ' + error);
+      });
+    };
+
+
+    $scope.submit = function () {
+      var option = {
+        cafe_id: $scope.selectedCafe.value.id,
+        table_id: $scope.table.id,
+        card_id: $scope.card.id
+      };
+
+      WebApi.tableCheckout(option).then(function (response) {
+        $ionicPopup.alert({
+          title: 'Success',
+          content: response.data.data.message
+        });
+
+      }, function (error) {
+        $ionicPopup.alert({
+          title: 'Error',
+          content: error.data.data.message
+        });
+      });
+    }
+
   });
-
-

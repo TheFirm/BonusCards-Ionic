@@ -114,6 +114,21 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
         }
       })
 
+      .state('tab.checkin', {
+        url: '/checkin',
+        views: {
+          'tab-checkin': {
+            templateUrl: 'templates/tab-checkin.html',
+            controller: 'CheckinCtrl'
+          }
+        },
+        resolve: {
+          cardsList: function (BonusCards) {
+            return BonusCards.getMyCards();
+          }
+        }
+      })
+
     ;
 
     // if none of the above states are matched, use this as the fallback

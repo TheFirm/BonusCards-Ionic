@@ -1,0 +1,48 @@
+<ion-view view-title="Check-In">
+    <ion-content class="checkin-page">
+        <ion-list>
+            <div class="card" ng-if="!card">
+                <div class="item item-button-right">
+                    You do not have !FEST card.
+                    <button class="button button-positive" ui-sref="tab.card-create({serviceId : '1'})">
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div class="list card card-info" ng-if="card">
+                <div class="item item-body">
+                    <img class="full-image fest-logo" ng-src="img/festLogo.jpg">
+                    <barcode-directive current-code="card.code"></barcode-directive>
+                </div>
+                <div class="item item-body">
+                    <form ng-submit="submit()">
+                        <div class="list">
+                            <span class="button button-dark" ng-click="scanBarcode()">
+                                <span class="ion-qr-scanner icon"><span class="scan">scan QR</span></span>
+                            </span>
+                        </div>
+                        <div class="list">
+
+                            <label class="item item-input item-select">
+                                <span class="input-label">
+                                    Cafe
+                                </span>
+                                <select ng-required="true" ng-options="cafe as cafe.name for cafe in cafes track by cafe.id" ng-model="selectedCafe.value">
+                                    <option value="" disabled selected>Select Or Scan QR-Code</option>
+                                </select>
+                            </label>
+
+                        </div>
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="text" required ng-model="table.id" placeholder="Table ID">
+                            </label>
+                            <input type="hidden" ng-model="service" placeholder="Service">
+                        </div>
+                        <button class="button button-block button-positive">Check-In</button>
+                    </form>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>
