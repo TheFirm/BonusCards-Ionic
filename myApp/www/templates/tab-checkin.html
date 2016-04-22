@@ -1,4 +1,4 @@
-<ion-view view-title="Check-In">
+<ion-view view-title="Check-in">
     <ion-content class="checkin-page">
         <ion-list>
             <div class="card" ng-if="!card">
@@ -15,32 +15,40 @@
                     <barcode-directive current-code="card.code"></barcode-directive>
                 </div>
                 <div class="item item-body">
-                    <form ng-submit="submit()">
+                    <form>
                         <div class="list">
-                            <span class="button button-dark" ng-click="scanBarcode()">
+                            <span class="button button-large button-dark" ng-click="scanBarcode()">
                                 <span class="ion-qr-scanner icon"><span class="scan">scan QR</span></span>
                             </span>
                         </div>
-                        <div class="list">
+                    </form>
+                </div>
+                <div class="item item-body">
+                    <a href="#" class="item item-icon-left" ng-click="toggleManualBlock()">
+                        <i class="icon ion-arrow-down-b"></i>
+                        Add data manually
+                    </a>
+                </div>
+                <div class="item item-body" ng-show="showManualBlock()">
+                    <div class="list">
 
-                            <label class="item item-input item-select">
+                        <label class="item item-input item-select">
                                 <span class="input-label">
                                     Cafe
                                 </span>
-                                <select ng-required="true" ng-options="cafe as cafe.name for cafe in cafes track by cafe.id" ng-model="selectedCafe.value">
-                                    <option value="" disabled selected>Select Or Scan QR-Code</option>
-                                </select>
-                            </label>
+                            <select ng-required="true" ng-options="cafe as cafe.name for cafe in cafes track by cafe.id" ng-model="selectedCafe.value">
+                                <option value="" disabled selected>Select Or Scan QR-Code</option>
+                            </select>
+                        </label>
 
-                        </div>
-                        <div class="list">
-                            <label class="item item-input">
-                                <input type="text" required ng-model="table.id" placeholder="Table ID">
-                            </label>
-                            <input type="hidden" ng-model="service" placeholder="Service">
-                        </div>
-                        <button class="button button-block button-positive">Check-In</button>
-                    </form>
+                    </div>
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" required ng-model="table.id" placeholder="Table ID">
+                        </label>
+                        <input type="hidden" ng-model="service" placeholder="Service">
+                    </div>
+                    <button class="button button-block button-positive" ng-click="submit()">Check-in</button>
                 </div>
             </div>
         </ion-list>

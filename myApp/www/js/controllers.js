@@ -161,15 +161,38 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       $scope.cafes = response.data.data;
     });
 
+    var showManualBlock = false;
+    $scope.toggleManualBlock = function () {
+      showManualBlock = !showManualBlock;
+    };
+    $scope.showManualBlock = function () {
+      return showManualBlock
+    };
+
 
     $scope.scanBarcode = function () {
       $cordovaBarcodeScanner.scan().then(function (imageData) {
         $scope.code = imageData.text;
         var codeData = $scope.code.split(',');
-        $scope.selectedCafe.value = $scope.cafes.filter(function (cafe) {
-          return cafe.id == codeData[0]
-        })[0];
-        $scope.table.id = codeData[1];
+        var isValidCode = codeData.every(function (data) {
+          return !isNaN(data)
+        });
+
+        if(isValidCode){
+          $scope.selectedCafe.value = $scope.cafes.filter(function (cafe) {
+            return cafe.id == codeData[0]
+          })[0];
+          $scope.table.id = codeData[1];
+          $scope.submit();
+        }
+        else{
+          $ionicPopup.alert({
+            title: 'Error',
+            content: 'QR code invalid'
+          });
+        }
+
+
       }, function (error) {
         console.log('An error happened -> ' + error);
       });
