@@ -153,7 +153,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     /* Get first !fest card data */
     if(cardsList.data.items){
       $scope.card = cardsList.data.items.filter(function (card) {
-        return card.service.id == 1;
+        return card.service && card.service.id == 1;
       })[0];
     }
 
