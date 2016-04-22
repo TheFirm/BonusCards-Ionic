@@ -25,7 +25,8 @@
                 </div>
                 <div class="item item-body">
                     <a href="#" class="item item-icon-left" ng-click="toggleManualBlock()">
-                        <i class="icon ion-arrow-down-b"></i>
+                        <i class="icon ion-arrow-down-b" ng-show="!showManualBlock()"></i>
+                        <i class="icon ion-arrow-up-b" ng-show="showManualBlock()"></i>
                         Add data manually
                     </a>
                 </div>
