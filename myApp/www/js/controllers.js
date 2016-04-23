@@ -144,7 +144,8 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
 
   /* CardCreateCtrl */
-  .controller('CheckinCtrl', function ($scope, LoginService, cardsList, $cordovaBarcodeScanner, WebApi, $ionicPopup)  {
+  .controller('CheckinCtrl', function ($scope, LoginService, cardsList, $cordovaBarcodeScanner, WebApi, $ionicPopup,
+                                       $ionicScrollDelegate, $timeout)  {
     LoginService.loginCheck();
 
     $scope.selectedCafe = {value : null};
@@ -164,6 +165,9 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     var showManualBlock = false;
     $scope.toggleManualBlock = function () {
       showManualBlock = !showManualBlock;
+      $timeout(function(){
+        $ionicScrollDelegate.resize();
+      },50)
     };
     $scope.showManualBlock = function () {
       return showManualBlock

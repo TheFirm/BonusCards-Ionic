@@ -26,8 +26,33 @@
 .checkin-page .card-info .fest-logo{
   width: 50%;
 }
+.checkin-page .cafe-select-block .input-label{
+ text-align: left;
+}
+.checkin-page  .cafe-select-block{
+  margin-bottom:0;
+}
+.checkin-page .manual-checkin-button{
+  color: #666;
+  font-size:14px;
+}
 img.barcode{
   width: auto!important;
   max-width: 90%;
   max-height: 200px;
+}
+.item-text-center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  height: 100%;
 }

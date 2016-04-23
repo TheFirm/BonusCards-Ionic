@@ -20,20 +20,22 @@
                     <form>
                         <div class="list">
                             <span class="button button-large button-dark" ng-click="scanBarcode()">
-                                <span class="ion-qr-scanner icon"><span class="scan">scan QR</span></span>
+                                <span class="ion-qr-scanner icon"><span class="scan">Check-in by QR</span></span>
                             </span>
                         </div>
                     </form>
                 </div>
-                <div class="item item-body">
-                    <a href="#" class="item item-icon-left" ng-click="toggleManualBlock()">
-                        <i class="icon ion-arrow-down-b" ng-show="!showManualBlock()"></i>
-                        <i class="icon ion-arrow-up-b" ng-show="showManualBlock()"></i>
-                        Add data manually
-                    </a>
-                </div>
+                <a href="#" class="item item-body manual-checkin-button" ng-click="toggleManualBlock()">
+                    <div class="row">
+                        <div class="col col-50 col-offset-50">
+                            Manually check-in
+                            <i class="ion-arrow-down-b" ng-show="!showManualBlock()"></i>
+                            <i class="ion-arrow-up-b" ng-show="showManualBlock()"></i>
+                        </div>
+                    </div>
+                </a>
                 <div class="item item-body" ng-show="showManualBlock()">
-                    <div class="list">
+                    <div class="list cafe-select-block">
 
                         <label class="item item-input item-select">
                                 <span class="input-label">
@@ -49,7 +51,6 @@
                         <label class="item item-input">
                             <input type="text" required ng-model="table.id" placeholder="Table ID">
                         </label>
-                        <input type="hidden" ng-model="service" placeholder="Service">
                     </div>
                     <button class="button button-block button-positive" ng-click="submit()">Check-in</button>
                 </div>

@@ -10,12 +10,12 @@
       <ion-item class="item-avatar item-icon-right"
                 type="item-text-wrap" href="#/tab/card-create/">
         <img ng-src="img/service.png">
-        <h2>Other...</h2>
+        <h2 class="item-text-center">Other...</h2>
       </ion-item>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="service in services"
                 type="item-text-wrap" href="#/tab/card-create/{{service.id}}">
         <img ng-src="{{service.logo_url}}">
-        <h2>{{service.name}}</h2>
+        <h2 class="item-text-center">{{service.name}}</h2>
       </ion-item>
     </ion-list>
   </ion-content>
