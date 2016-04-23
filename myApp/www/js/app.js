@@ -126,7 +126,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           cardsList: function (BonusCards) {
             return BonusCards.getMyCards();
           }
-        }
+        },
+        cache: false
       })
 
     ;
