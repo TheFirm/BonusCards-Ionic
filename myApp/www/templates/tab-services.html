@@ -14,7 +14,7 @@
       </ion-item>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="service in services"
                 type="item-text-wrap" href="#/tab/card-create/{{service.id}}">
-        <img ng-src="{{service.logo_url}}">
+        <div class="service-logo" style="background-image: url('{{service.logo_url}}');"></div>
         <h2 class="item-text-center">{{service.name}}</h2>
       </ion-item>
     </ion-list>

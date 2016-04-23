@@ -36,6 +36,16 @@
   color: #666;
   font-size:14px;
 }
+.service-logo {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 img.barcode{
   width: auto!important;
   max-width: 90%;
