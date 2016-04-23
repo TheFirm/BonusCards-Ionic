@@ -44,11 +44,8 @@ app.factory('LoginService', function (WebApi, $q, ngFB, $state, $location, $wind
   }
 
   function isLogged() {
-    if (window.localStorage.tokenApi && ngFB.getLoginStatus().$$state.value.status == 'connected') {
-      return true;
-    }
+    return !!(window.localStorage.tokenApi && ngFB.getLoginStatus().$$state.value.status == 'connected');
 
-    return false;
   }
 
   function loginCheck() {

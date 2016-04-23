@@ -26,3 +26,8 @@
 .checkin-page .card-info .fest-logo{
   width: 50%;
 }
+img.barcode{
+  width: auto!important;
+  max-width: 90%;
+  max-height: 200px;
+}

@@ -11,7 +11,11 @@ app.directive('barcodeDirective', function () {
       scope.$watch('currentCode', function () {
         if (scope.currentCode) {
           var barcodeImg = element.find('.barcode');
-          $(barcodeImg).JsBarcode(scope.currentCode);
+          $(barcodeImg).JsBarcode(scope.currentCode, {
+            fontSize: 80,
+            width: 8,
+            height: 400
+          });
         }
       });
     }
