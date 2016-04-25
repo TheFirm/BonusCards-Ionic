@@ -60,12 +60,9 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   })
 
   /* ServicesCtrl */
-  .controller('ServicesCtrl', function ($scope, Services, LoginService) {
+  .controller('ServicesCtrl', function ($scope, Services, LoginService, serviceList) {
     LoginService.loginCheck();
-    $scope.services = [];
-    Services.getServices().then(function (data) {
-      $scope.services = data.data.items;
-    });
+    $scope.services = serviceList;
     $scope.doRefresh = function() {
       Services.getServices().then(function (data) {
         $scope.services = data.data.items;
@@ -79,13 +76,15 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
   })
 
-  .controller('ProfileCtrl', function ($scope, ngFB, $state, LoginService, $ionicPopup) {
+  .controller('ProfileCtrl', function ($scope, ngFB, $state, LoginService, $ionicPopup, $ionicLoading) {
     LoginService.loginCheck();
+    $ionicLoading.show();
     ngFB.api({
       path: '/me',
       params: {fields: 'id,name'}
     }).then(
       function (user) {
+        $ionicLoading.hide();
         $scope.user = user;
       },
       function (error) {
@@ -147,7 +146,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
   .controller('CheckinCtrl', function ($scope, LoginService, cardsList, $cordovaBarcodeScanner, WebApi, $ionicPopup,
                                        $ionicScrollDelegate, $timeout)  {
     LoginService.loginCheck();
-
     $scope.selectedCafe = {value : null};
     $scope.table = {id : null};
 

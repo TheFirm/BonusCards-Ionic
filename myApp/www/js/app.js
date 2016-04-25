@@ -70,8 +70,12 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           }
         },
         resolve: {
-          cardsList: function (BonusCards) {
-            return BonusCards.getMyCards();
+          cardsList: function (BonusCards, $ionicLoading) {
+            $ionicLoading.show();
+            return BonusCards.getMyCards().then(function (data) {
+              $ionicLoading.hide();
+              return data;
+            });
           }
         }
       })
@@ -91,6 +95,15 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           'tab-services': {
             templateUrl: 'templates/tab-services.html',
             controller: 'ServicesCtrl'
+          }
+        },
+        resolve: {
+          serviceList : function (Services, $ionicLoading) {
+            $ionicLoading.show();
+            return Services.getServices().then(function (data) {
+              $ionicLoading.hide();
+              return data.data.items;
+            });
           }
         }
       })
@@ -123,8 +136,12 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           }
         },
         resolve: {
-          cardsList: function (BonusCards) {
-            return BonusCards.getMyCards();
+          cardsList: function (BonusCards, $ionicLoading) {
+            $ionicLoading.show();
+            return BonusCards.getMyCards().then(function (data) {
+              $ionicLoading.hide();
+              return data;
+            });
           }
         },
         cache: false
