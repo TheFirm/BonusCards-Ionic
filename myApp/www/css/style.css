@@ -26,6 +26,17 @@
 .checkin-page .card-info .fest-logo{
   width: 50%;
 }
+.checkin-page .with-password .fest-logo{
+  float: left;
+}
+.bofon-number {
+  font-size: 50px;
+  line-height: 60px;
+}
+.card-balance{
+  width: 50%;
+  display: inline-block;
+}
 .checkin-page .cafe-select-block .input-label{
  text-align: left;
 }

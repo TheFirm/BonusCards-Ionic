@@ -9,9 +9,13 @@
                     </button>
                 </div>
             </div>
-            <div class="list card-info" ng-if="card">
+            <div class="list card-info" ng-class="{'with-password' : card.balance}" ng-if="card">
                 <div class="item item-body">
                     <img class="full-image fest-logo" ng-src="img/festLogo.jpg">
+                    <div class="card-balance" ng-if="card.balance">
+                        <div class="bofon-number" ng-bind="card.balance"></div>
+                        <div class="bofon-title">Bofony</div>
+                    </div>
                 </div>
                 <div class="item item-body">
                     <barcode-directive current-code="card.code"></barcode-directive>
