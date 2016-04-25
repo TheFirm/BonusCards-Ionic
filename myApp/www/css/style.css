@@ -36,6 +36,9 @@
   color: #666;
   font-size:13px;
 }
+.checkin-page .item-input{
+  border: 0;
+}
 .service-logo {
   height: 50px;
   width: 50px;
