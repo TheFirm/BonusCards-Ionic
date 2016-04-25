@@ -108,7 +108,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
         }
       })
       .state('tab.card-create', {
-        url: '/card-create/:serviceId',
+        url: '/card-create/:serviceId?isFestCard',
         views: {
           'tab-services': {
             templateUrl: 'templates/card-create.html',

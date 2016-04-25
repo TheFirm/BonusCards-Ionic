@@ -1,20 +1,19 @@
-<ion-view view-title="Add New Card">
+<ion-view view-title="{{isFestCard?'Add Fest Card':'Add New Card'}}">
   <ion-content class="padding">
-    <form ng-submit="submit()" ng-controller="CardCreateCtrl">
+    <form ng-submit="submit()">
       <div class="list">
         <label class="item item-input item-floating-label" ng-show="!currentServiceId">
-          <input type="text" ng-model="name" placeholder="Card name">
+          <input type="text" ng-model="card.name" placeholder="Card name">
         </label>
 
         <div class="item-input-inset scan-input-block">
           <label class="item item-input item-floating-label item-input-wrapper">
-            <input type="text" required ng-model="barcode" placeholder="Card number">
+            <input type="text" required ng-model="card.barcode" placeholder="Card number">
           </label>
           <span class="button button-small button-dark" ng-click="scanBarcode()">
             <span class="ion-qr-scanner icon"><span class="scan">scan</span></span>
           </span>
         </div>
-        <input type="hidden" ng-model="service" placeholder="Service">
       </div>
       <button class="button button-block button-positive">Add</button>
     </form>

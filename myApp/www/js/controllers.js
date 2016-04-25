@@ -106,6 +106,11 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     LoginService.loginCheck();
 
     $scope.currentServiceId = $stateParams.serviceId ? $stateParams.serviceId : false;
+    $scope.isFestCard = $stateParams.isFestCard;
+    $scope.card = {
+      barcode: null,
+      name: null
+    };
 
     $scope.onTabSelected = function() {
       $state.go('tab.services');
@@ -113,7 +118,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
     $scope.scanBarcode = function () {
       $cordovaBarcodeScanner.scan().then(function (imageData) {
-        $scope.barcode = imageData.text;
+        $scope.card.barcode = imageData.text;
         console.log("Barcode Format -> " + imageData.format);
         console.log("Cancelled -> " + imageData.cancelled);
       }, function (error) {
@@ -123,13 +128,13 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
     $scope.submit = function () {
       var option = {
-          name: $scope.name,
+          name: $scope.card.name,
           service_id: $stateParams.serviceId,
-          code: $scope.barcode
+          code: $scope.card.barcode
         };
 
       WebApi.addCard(option).then(function (response) {
-        $scope.barcode = $scope.name = '';
+        $scope.card.barcode = $scope.card.name = '';
 
         $state.go('tab.card-detail', {"cardId": response.data.data.id});
       }, function (error) {
