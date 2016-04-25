@@ -107,9 +107,13 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
     $scope.currentServiceId = $stateParams.serviceId ? $stateParams.serviceId : false;
     $scope.isFestCard = $stateParams.isFestCard;
+    if($scope.currentServiceId == 1){
+      $scope.isFestCard = true;
+    }
     $scope.card = {
       barcode: null,
-      name: null
+      name: null,
+      password: null
     };
 
     $scope.onTabSelected = function() {
@@ -130,7 +134,8 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       var option = {
           name: $scope.card.name,
           service_id: $stateParams.serviceId,
-          code: $scope.card.barcode
+          code: $scope.card.barcode,
+          password: $scope.card.password
         };
 
       WebApi.addCard(option).then(function (response) {

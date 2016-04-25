@@ -1,4 +1,4 @@
-<ion-view view-title="{{isFestCard?'Add Fest Card':'Add New Card'}}">
+<ion-view view-title="{{isFestCard?'Add Lokal Card':'Add New Card'}}">
   <ion-content class="padding">
     <form ng-submit="submit()">
       <div class="list">
@@ -13,6 +13,11 @@
           <span class="button button-small button-dark" ng-click="scanBarcode()">
             <span class="ion-qr-scanner icon"><span class="scan">scan</span></span>
           </span>
+        </div>
+        <div class="item-input-inset scan-input-block" ng-show="isFestCard">
+          <label class="item item-input item-floating-label item-input-wrapper">
+            <input type="text" required ng-model="card.password" placeholder="Lokal password">
+          </label>
         </div>
       </div>
       <button class="button button-block button-positive">Add</button>

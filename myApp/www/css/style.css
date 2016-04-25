@@ -3,7 +3,7 @@
 .ng-invalid {border-color: red;}
 .scan-input-block{
   padding-left: 1px;
-  padding-right: 0;
+  padding-right: 1px;
 }
 .scan-input-block .item-input-wrapper{
   border-radius: 0;
