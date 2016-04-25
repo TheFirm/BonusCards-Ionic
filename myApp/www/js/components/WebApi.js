@@ -16,9 +16,19 @@ app.factory('WebApi', function ($http) {
     return $http.post(API_URL + 'user/auth', data);
   }
 
-  /* Start. Bonus Cards */
+  /* Add Bonus Cards */
   function myCards() {
-    return $http.get(API_URL + 'bonus-card/my-cards?page=1', options);
+    return $http.get(API_URL + 'bonus-card/my-cards?page=1', options).
+    then(function(response) {
+      return response;
+    }, function(response) {
+      return response;
+    });
+  }
+
+  /* Start. Bonus Cards */
+  function addCard(data) {
+    return $http.post(API_URL + 'bonus-cards',data, options);
   }
 
   function viewCard(id) {
@@ -36,12 +46,25 @@ app.factory('WebApi', function ($http) {
     return $http.get(API_URL + 'services', options);
   }
 
+  function tableCheckout(data) {
+    return $http.post(API_URL + 'check-in',data, options);
+  }
+
+  function getCafes() {
+    return $http.get(API_URL + 'cafes', options);
+  }
+
+
+
 
   return {
     login: login,
     myCards: myCards,
     viewCard: viewCard,
     removeCard: removeCard,
-    getServices: getServices
+    getServices: getServices,
+    addCard: addCard,
+    tableCheckout: tableCheckout,
+    getCafes : getCafes
   }
 });

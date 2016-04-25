@@ -65,7 +65,17 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
         views: {
           'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
-            controller: 'MyCardsCtrl'
+            controller: 'MyCardsCtrl',
+            cache: false
+          }
+        },
+        resolve: {
+          cardsList: function (BonusCards, $ionicLoading) {
+            $ionicLoading.show();
+            return BonusCards.getMyCards().then(function (data) {
+              $ionicLoading.hide();
+              return data;
+            });
           }
         }
       })
@@ -86,10 +96,19 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
             templateUrl: 'templates/tab-services.html',
             controller: 'ServicesCtrl'
           }
+        },
+        resolve: {
+          serviceList : function (Services, $ionicLoading) {
+            $ionicLoading.show();
+            return Services.getServices().then(function (data) {
+              $ionicLoading.hide();
+              return data.data.items;
+            });
+          }
         }
       })
       .state('tab.card-create', {
-        url: '/card-create/:serviceId',
+        url: '/card-create/:serviceId?isFestCard',
         views: {
           'tab-services': {
             templateUrl: 'templates/card-create.html',
@@ -108,11 +127,28 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
         }
       })
 
+      .state('tab.checkin', {
+        url: '/checkin',
+        views: {
+          'tab-checkin': {
+            templateUrl: 'templates/tab-checkin.html',
+            controller: 'CheckinCtrl'
+          }
+        },
+        resolve: {
+          cardsList: function (BonusCards, $ionicLoading) {
+            $ionicLoading.show();
+            return BonusCards.getMyCards().then(function (data) {
+              $ionicLoading.hide();
+              return data;
+            });
+          }
+        },
+        cache: false
+      })
+
     ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/cards');
-    //
-    //$httpProvider.defaults.useXDomain = true;
-    //delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });
