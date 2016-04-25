@@ -2,7 +2,12 @@
   <ion-content>
     <ion-list>
       <div id="no-cards-block" class="card" ng-if="!cards.length">
-        <div class="item item-text-wrap">You have not any cards.</div>
+        <div class="item item-button-right">
+          You have not any cards.
+          <button class="button button-positive" ui-sref="tab.services">
+            Add
+          </button>
+        </div>
       </div>
       <ion-item  class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards" type="item-text-wrap"
                 href="#/tab/cards/{{card.id}}">
