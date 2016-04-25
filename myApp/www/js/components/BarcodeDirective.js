@@ -14,7 +14,7 @@ app.directive('barcodeDirective', function () {
           $(barcodeImg).JsBarcode(scope.currentCode, {
             fontSize: 80,
             width: 8,
-            height: 400
+            height: 300
           });
         }
       });
