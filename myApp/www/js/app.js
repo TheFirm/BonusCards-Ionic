@@ -140,7 +140,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
             $ionicLoading.show();
             return WebApi.getLokalCard().then(function (data) {
               $ionicLoading.hide();
-              return data;
+              return data.data;
             });
           }
         },

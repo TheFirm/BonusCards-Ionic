@@ -11,11 +11,10 @@
       </div>
       <ion-item  class="item-remove-animate item-avatar item-icon-right" ng-repeat="card in cards" type="item-text-wrap"
                 href="#/tab/cards/{{card.id}}">
-        <img ng-if="card.service.logo_url" ng-src="{{card.service.logo_url}}">
-        <img ng-if="!card.service.logo_url" ng-src="{{defaultLogo}}">
-        <h2 ng-if="card.name">{{card.name}}</h2>
-        <h2 ng-if="!card.name">{{card.service.name}}</h2>
-        <p>{{card.lastText}}</p>
+        <div ng-if="card.service.logo_url" class="service-logo" style="background-image: url('{{card.service.logo_url}}');"></div>
+        <div ng-if="!card.service.logo_url" class="service-logo" style="background-image: url('{{defaultLogo}}');"></div>
+        <h2 class="item-text-center" ng-if="card.name">{{card.name}}</h2>
+        <h2 class="item-text-center" ng-if="!card.name">{{card.service.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="removeCard(card)">
