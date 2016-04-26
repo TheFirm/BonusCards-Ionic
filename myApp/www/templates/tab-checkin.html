@@ -3,17 +3,17 @@
         <ion-list>
             <div class="card" ng-if="!card">
                 <div class="item item-button-right">
-                    You do not have !FEST card
+                    You do not have LOKAL card
                     <button class="button button-positive" ui-sref="tab.card-create({serviceId : '1', isFestCard: 'true'})">
                         Add
                     </button>
                 </div>
             </div>
-            <div class="list card-info" ng-class="{'with-password' : card.balance}" ng-if="card">
+            <div class="list card-info" ng-class="{'with-password' : hasBalanceData()}" ng-if="card">
                 <div class="item item-body">
                     <img class="full-image fest-logo" ng-src="img/festLogo.jpg">
-                    <div class="card-balance" ng-if="card.balance">
-                        <div class="bofon-number" ng-bind="card.balance"></div>
+                    <div class="card-balance" ng-if="hasBalanceData()">
+                        <div class="bofon-number" ng-bind="balance"></div>
                         <div class="bofon-title">Bofony</div>
                     </div>
                 </div>

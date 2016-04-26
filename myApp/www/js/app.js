@@ -136,9 +136,9 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
           }
         },
         resolve: {
-          cardsList: function (BonusCards, $ionicLoading) {
+          lokalCard: function (WebApi, $ionicLoading) {
             $ionicLoading.show();
-            return BonusCards.getMyCards().then(function (data) {
+            return WebApi.getLokalCard().then(function (data) {
               $ionicLoading.hide();
               return data;
             });
