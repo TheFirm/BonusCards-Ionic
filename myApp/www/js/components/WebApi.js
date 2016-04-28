@@ -54,6 +54,10 @@ app.factory('WebApi', function ($http) {
     return $http.get(API_URL + 'cafes', options);
   }
 
+  function getLokalCard() {
+    return $http.get(API_URL + 'lokal-card', options);
+  }
+
 
 
 
@@ -65,6 +69,7 @@ app.factory('WebApi', function ($http) {
     getServices: getServices,
     addCard: addCard,
     tableCheckout: tableCheckout,
-    getCafes : getCafes
+    getCafes : getCafes,
+    getLokalCard : getLokalCard
   }
 });

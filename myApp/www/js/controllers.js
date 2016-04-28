@@ -84,7 +84,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
       params: {fields: 'id,name'}
     }).then(
       function (user) {
-        $ionicLoading.hide();
         $scope.user = user;
       },
       function (error) {
@@ -92,7 +91,9 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
           title: 'Error',
           content: error.message
         });
-      });
+      }).finally(function () {
+      $ionicLoading.hide();
+    });
 
     $scope.logout = function () {
       localStorage.clear();
@@ -113,7 +114,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
     $scope.card = {
       barcode: null,
       name: null,
-      password: null
+      pin: null
     };
 
     $scope.onTabSelected = function() {
@@ -135,7 +136,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
           name: $scope.card.name,
           service_id: $stateParams.serviceId,
           code: $scope.card.barcode,
-          password: $scope.card.password
+          pin: $scope.card.pin
         };
 
       WebApi.addCard(option).then(function (response) {
@@ -153,18 +154,19 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB'])
 
 
   /* CardCreateCtrl */
-  .controller('CheckinCtrl', function ($scope, LoginService, cardsList, $cordovaBarcodeScanner, WebApi, $ionicPopup,
+  .controller('CheckinCtrl', function ($scope, LoginService, lokalCard, $cordovaBarcodeScanner, WebApi, $ionicPopup,
                                        $ionicScrollDelegate, $timeout)  {
     LoginService.loginCheck();
     $scope.selectedCafe = {value : null};
     $scope.table = {id : null};
 
-    /* Get first !fest card data */
-    if(cardsList.data.items){
-      $scope.card = cardsList.data.items.filter(function (card) {
-        return card.service && card.service.id == 1;
-      })[0];
-    }
+    $scope.card = lokalCard.data.card;
+
+    $scope.balance = lokalCard.data.balance;
+
+    $scope.hasBalanceData = function () {
+      return $scope.balance !== null;
+    };
 
     WebApi.getCafes().then(function (response) {
       $scope.cafes = response.data.data;
